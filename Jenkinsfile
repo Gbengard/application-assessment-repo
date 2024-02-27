@@ -93,7 +93,6 @@ pipeline {
           aws ec2 modify-launch-template --launch-template-name my-template-for-auto-scaling --default-version ${BUILD_NUMBER}
           '''
         }
-
       }
     }
   }

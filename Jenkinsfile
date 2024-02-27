@@ -76,8 +76,10 @@ pipeline {
         }
       stage('Run Container Command and Append In Launch Template') {
         steps {
+          sh '''
           echo "docker run -d -p 8080:8080 gbengard:cloudhight:${BUILD_NUMBER}" >> userdata.sh 
           base64_userdata=$(base64 -w 0 /home/gbengard/userdata.sh)
+          '''
         }
       }
       stage ('Update the Launch Template and Modify to Latest Version') {

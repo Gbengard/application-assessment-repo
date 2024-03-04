@@ -10,7 +10,7 @@ Let's delve into the details of the CircleCI configuration file (`config.yml`) p
 
 - **Version**: The configuration file starts with the declaration of the CircleCI version being used. In this case, it's `2.1`, which indicates the version 2.1 of CircleCI's configuration syntax.
   
-- **Orbs**: Orbs are packages of YAML configuration for CircleCI. They provide reusable and shareable sets of commands, executors, and jobs. In this configuration, the `aws-sam-serverless` orb is imported at version `3.1.0`, which allows for seamless integration with AWS SAM (Serverless Application Model).
+- **Orbs**: Orbs are packages of YAML configuration for CircleCI. They provide reusable and shareable sets of commands, executors, and jobs. In this configuration, the `aws-sam-serverless` orb is imported at version `3.1.0`, which allows for seamless integration with AWS.
 
 #### Commands
 
@@ -42,6 +42,24 @@ Let's delve into the details of the CircleCI configuration file (`config.yml`) p
 
 The CircleCI configuration file orchestrates the CI/CD pipeline for the demo project, from building and pushing Docker images to AWS infrastructure configuration. It utilizes custom commands, jobs, and workflows to automate the process efficiently.
 
+## Successful Integration
+
+Let's check what integration does:
+
+1.  THe CircleCI Integration was successful.
+
+  Image 
+  
+2. The Image was pushed to my Dockerhub Repository
+  Image
+3.  New Launch template version was created and automatically set to default usin the Circleci
+  Image
+4.  The Autoscaling group update the Instance to use the latest version created in the CircleCI
+  Image
+5.  Refresh the Application Load Balancer DNS Created Before, it should change to the Pet-CLinic App
+
+  Image
+  
 ### Stages:
 
 - Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)

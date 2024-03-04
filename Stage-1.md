@@ -122,7 +122,7 @@ This Terraform template automates the setup of a basic AWS infrastructure, inclu
 
 **Happy provisioning!**
 
-##Checking the Provisioned Infrastructure
+## Checking the Provisioned Infrastructure
 
 1. Using the Terraform Cloud, all 23 resources were fully created
 

@@ -146,4 +146,4 @@ This Terraform template automates the setup of a basic AWS infrastructure, inclu
 
 - Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md) <===Here
 - Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md)
-- Stage 3: CleanUp
+- Stage 3: [CleanUp](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-3.md)

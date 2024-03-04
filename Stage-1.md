@@ -41,13 +41,13 @@ For Terraform Cloud using Version Control Workflow:
 1.	Click on "New", choose workspace
 2.	Click on "Version Control Workflow", then choose "Github", then click on "github.com"
 
-images
+![Untitled](/images/Untitled.png)
 
-3. Click on "Authorize", to install Github
+3. Click on "Authorize", to install GitHub
 
-Images
+![Untitled](/images/Untitled1.png)
 
-4.	Input your github details.
+4.	Input your GitHub details.
 
 5.	Input the workspace name
 
@@ -57,15 +57,15 @@ Images
 
 8.	Under the VCS Triggers, check the "Always trigger runs"
 
-9.  Input the branch your terraform reside in.
+9.  Input the branch your terraform resides in.
 
 10.	Then click on "Create".
 
 12.	Click on "Start New Plan", and click on "Start". This will create the resources.
 
-    Images
+    ![Untitled](/images/Untitled2.png)
 
-    Images
+   ![Untitled](/images/Untitled3.png)
 
 
 ## Template Overview
@@ -128,19 +128,19 @@ This Terraform template automates the setup of a basic AWS infrastructure, inclu
 
 1. Using the Terraform Cloud, all 23 resources were fully created
 
-    Images
+    ![Untitled](/images/Untitled4.png)
 
-2. Go to running "EC2 Instaces", there are 2 instances in the private subnet currently running.
+2. Go to running "EC2 Instances", there are 2 instances in the private subnet currently running.
 
-   Images
+   ![Untitled](/images/Untitled5.png)
 
 3. Go to "Target Group", the two instances are healthy.
 
-    Images
+    ![Untitled](/images/Untitled6.png)
    
-5. Go to "Application Load Balancer", copy the DNS Name, paste on your browser. It should be running an Nginx Server.
+5. Go to "Application Load Balancer", copy the DNS Name, and paste it into your browser. It should be running an Nginx Server.
 
-    Images
+    ![Untitled](/images/Untitled7.png)
 
 ## Stages:
 

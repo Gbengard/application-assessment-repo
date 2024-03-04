@@ -16,4 +16,4 @@ Before getting started, make sure you have this ready:
 
 - Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)
 - Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md)
-- Stage 3: CleanUp
+- Stage 3: [CleanUp](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-3.md)

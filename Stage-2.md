@@ -74,6 +74,6 @@ For further details and stages of the project, refer to the following:
 
 - Stage 1: [Provisioning of Infrastructure Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)
 - Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md)
-- Stage 3: Cleanup
+- Stage 3: [CleanUp](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-3.md)
 
 By following these instructions meticulously, you ensure the smooth operation and automation of your project's CI/CD pipeline using CircleCI.

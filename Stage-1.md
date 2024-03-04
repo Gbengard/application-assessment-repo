@@ -43,7 +43,7 @@ For Terraform Cloud using Version Control Workflow:
 
 images
 
-3. Click on Authorize", to install Github
+3. Click on "Authorize", to install Github
 
 Images
 
@@ -57,11 +57,13 @@ Images
 
 8.	Under the VCS Triggers, check the "Always trigger runs"
 
-9.Input the branch your terraform reside in.
+9.  Input the branch your terraform reside in.
 
 10.	Then click on "Create".
 
-11.	Return to the workspace created and click on "Start New Plan". This will create the resources.
+12.	Click on "Start New Plan", and click on "Start". This will create the resources.
+
+    Images
 
 
 ## Template Overview

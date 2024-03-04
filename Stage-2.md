@@ -41,3 +41,9 @@ Let's delve into the details of the CircleCI configuration file (`config.yml`) p
 ### Conclusion
 
 The CircleCI configuration file orchestrates the CI/CD pipeline for the demo project, from building and pushing Docker images to AWS infrastructure configuration. It utilizes custom commands, jobs, and workflows to automate the process efficiently.
+
+### Stages:
+
+- Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)
+- Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md) <=== Here
+- Stage 3: CleanUp

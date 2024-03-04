@@ -1,8 +1,8 @@
 # CircleCI Configuration
 
-Make Sure You Register CircleCI with your GitHub account.  Then follow the repository of your desired project. Doing this, will automatically trigger the CircleCI anytime there is new commit in the project.
+Make Sure You Register CircleCI with your GitHub account.  Then follow the repository of your desired project. Doing this will automatically trigger the CircleCI anytime there is a new commit in the project.
 
-Also, make sure you set the credentials for AWS CLI, DockerHub by going to "Organization Settings", then "Context", and click on "Create COntext"
+Also, make sure you set the credentials for AWS CLI, and DockerHub by going to "Organization Settings", then "Context", and clicking on "Create Context"
 
 Let's delve into the details of the CircleCI configuration file (`config.yml`) provided:
 

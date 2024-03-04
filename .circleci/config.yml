@@ -1,1 +1,85 @@
+version: 2.1
+orbs:
+  sam: circleci/aws-sam-serverless@3.1.0
+  
+commands:
+  install-dependencies:
+      steps:
+        - run:
+            name: Install AWS CLI and Configure
+            command: |
+              # Configure AWS CLI with credentials (use environment variables)
+              aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+              aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+              aws configure set default.region us-east-1
 
+        -  run:
+             name: Install JQ
+             command: |
+               yum update
+               yum install jq -y
+
+jobs:
+  build-and-push:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build-Docker-Image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/pet-clinic .
+            docker image ls
+      - run:
+         name: Docker Image Security Scanning
+         command: |
+           docker pull aquasec/trivy:0.45.0
+           docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.45.0 image $DOCKERHUB_USERNAME/pet-clinic
+      - run:
+          name: Push Docker Image
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push $DOCKERHUB_USERNAME/pet-clinic
+  aws-cli:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - install-dependencies
+      - run:
+          name: Create Userdata, Append docker run command, and Create Launch Template Version
+          command: |
+            echo '#!/bin/bash -xe
+            sudo apt-get update           
+            sudo apt-get install docker.io -y
+            sudo usermod -aG docker ubuntu
+            systemctl restart docker' > userdata.sh
+            echo 'docker pull gbengard/pet-clinic:latest
+            docker run -d -p 80:8080 gbengard/pet-clinic:latest' >> userdata.sh
+            base64_userdata=$(base64 -w 0 userdata.sh)
+            launch_template_names=$(aws ec2 describe-launch-templates | jq -r '.LaunchTemplates[].LaunchTemplateName')
+            echo "$launch_template_names"
+            aws ec2 create-launch-template-version \
+                --launch-template-name "$launch_template_names" \
+                --source-version 1 \
+                --version-description "My launch template" \
+                --launch-template-data "{\"UserData\":\"${base64_userdata}\"}" --no-cli-pager
+      - run:
+          name: Update to the Launch Template Version Created
+          command:  |
+            launch_template_names=$(aws ec2 describe-launch-templates | jq -r '.LaunchTemplates[].LaunchTemplateName')
+            aws ec2 modify-launch-template \
+                --launch-template-name "$launch_template_names" \
+                --default-version \$Latest
+      - run:
+          name: Configure Autoscaling group to use the Updated Launch Template Version
+          command: |
+            autoscaling_group_name=$(aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[].AutoScalingGroupName" --output text)
+            aws autoscaling start-instance-refresh --auto-scaling-group-name "$autoscaling_group_name" --preferences MinHealthyPercentage=50,InstanceWarmup=120
+workflows:
+  the_jobs:
+    jobs:
+      - build-and-push:
+          context: Credentials
+      - aws-cli:
+          requires: [build-and-push]
+          context: Credentials

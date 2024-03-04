@@ -17,7 +17,7 @@ For Terraform CLI:
 1. Clone this repository:
 
     ```bash
-    git clone gbengard/application-assessment
+    git clone gbengard/application-assessment-repo
     ```
 
 2. Navigate to the directory containing the Terraform scripts.

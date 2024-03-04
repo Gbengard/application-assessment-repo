@@ -136,7 +136,7 @@ This Terraform template automates the setup of a basic AWS infrastructure, inclu
 
     Images
    
-5. Go to "Application Load Balancer", copy the DNS Name, paste on your browser. It should be running an Nginx Server
+5. Go to "Application Load Balancer", copy the DNS Name, paste on your browser. It should be running an Nginx Server.
 
     Images
 

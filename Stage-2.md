@@ -1,67 +1,74 @@
-# CircleCI Configuration
+## CircleCI Configuration
 
-Make Sure You Register CircleCI with your GitHub account.  Then follow the repository of your desired project. Doing this will automatically trigger the CircleCI anytime there is a new commit in the project.
+To ensure seamless integration and automation of your project's CI/CD pipeline, it's imperative to properly configure CircleCI. Follow these steps to set up CircleCI with your GitHub repository and streamline your workflow efficiently.
 
-Also, make sure you set the credentials for AWS CLI, and DockerHub by going to "Organization Settings", then "Context", and clicking on "Create Context"
+### CircleCI Integration
 
-Let's delve into the details of the CircleCI configuration file (`config.yml`) provided:
+1. **Registration**: Register CircleCI with your GitHub account. This enables the automatic triggering of CircleCI whenever there's a new commit in your project repository.
+
+2. **Repository Follow**: Follow the repository of your desired project on CircleCI to activate automated builds upon new commits.
+
+### Setting Credentials
+
+Ensure proper configuration of credentials for AWS CLI and DockerHub. Access "Organization Settings" on CircleCI, navigate to "Context," and create a new context to securely store these credentials.
+
+### Details of Configuration (`config.yml`)
 
 #### Version and Orbs
 
-- **Version**: The configuration file starts with the declaration of the CircleCI version being used. In this case, it's `2.1`, which indicates the version 2.1 of CircleCI's configuration syntax.
+- **Version**: Declare the CircleCI version being utilized at the beginning of the configuration file (`2.1` for version 2.1 syntax).
   
-- **Orbs**: Orbs are packages of YAML configuration for CircleCI. They provide reusable and shareable sets of commands, executors, and jobs. In this configuration, the `aws-sam-serverless` orb is imported at version `3.1.0`, which allows for seamless integration with AWS.
+- **Orbs**: Import necessary orbs to facilitate integration tasks. For instance, import the `aws-sam-serverless` orb at a specific version (`3.1.0`) to seamlessly interact with AWS services.
 
-#### Commands
+#### Custom Commands
 
-- **Install-Dependencies Command**: Custom commands can be defined to encapsulate sequences of steps that are reused across multiple jobs. In this configuration, the `install-dependencies` command is defined to install AWS CLI and configure it with credentials, as well as to install JQ for JSON processing.
+Define custom commands to encapsulate reusable sequences of steps across multiple jobs. For instance, the `install-dependencies` command installs AWS CLI, configures credentials, and installs JQ for JSON processing.
 
 #### Jobs
 
-- **Build-and-Push Job**: This job is defined to build a Docker image of the application and push it to Docker Hub. It runs on a machine executor to have direct access to the Docker daemon. The job includes steps to checkout the code, build the Docker image, scan it for security vulnerabilities using Aqua Security's Trivy tool, and push the image to Docker Hub.
+- **Build-and-Push Job**: Define a job to build Docker images of the application and push them to Docker Hub. Utilize a machine executor for direct Docker daemon access. Include steps for code checkout, Docker image build, security vulnerability scanning using Trivy, and image push to Docker Hub.
 
-- **AWS-CLI Job**: This job configures AWS CLI, creates user data for EC2 instances, appends Docker run commands, and creates a new version of a launch template for EC2 instances. It runs on a Docker executor using the `amazon/aws-cli` image.
+- **AWS-CLI Job**: Configure AWS CLI, create EC2 user data, append Docker run commands, and update launch templates. Run this job on a Docker executor using the `amazon/aws-cli` image.
 
-  - **Checkout**: This step checks out the code from the repository to the CircleCI environment.
+  - **Checkout**: Retrieve code from the repository to the CircleCI environment.
   
-  - **Install-Dependencies**: This step executes the `install-dependencies` command defined earlier, which installs AWS CLI, configures it with credentials, and installs JQ for JSON processing.
+  - **Install-Dependencies**: Execute the custom `install-dependencies` command for AWS CLI setup and JQ installation.
 
-  - **Create Userdata, Append Docker run command, and Create Launch Template Version**: This step creates a Bash script (`userdata.sh`) containing instructions to update packages, install Docker, add the current user to the Docker group, and restart Docker service. It then appends commands to pull the Docker image from Docker Hub and run it on port 80 to the userdata script. Next, it base64 encodes the userdata script and retrieves the launch template name using AWS CLI and JQ. Finally, it creates a new version of the launch template with the updated userdata.
+  - **Userdata Script Creation**: Generate a Bash script (`userdata.sh`) to update packages, install Docker, configure Docker run commands, and create/encode userdata for launch template updates.
 
-  - **Update to the Launch Template Version Created**: This step updates the default version of the launch template to the latest version created in the previous step.
+  - **Launch Template Versioning**: Create and update launch template versions with the modified userdata script.
 
-  - **Configure Autoscaling group to use the Updated Launch Template Version**: This step retrieves the name of the autoscaling group using AWS CLI, then triggers an instance refresh to apply the changes in the launch template to the autoscaling group.
+  - **Autoscaling Group Configuration**: Update autoscaling group to utilize the latest launch template version.
 
 #### Workflows
 
-- **The_Jobs Workflow**: Workflows define the sequence and dependencies of jobs. In this configuration, the `the_jobs` workflow orchestrates the execution of the defined jobs. 
-  - The `build-and-push` job is executed first, which builds the Docker image and pushes it to Docker Hub.
-  - After the successful completion of the `build-and-push` job, the `aws-cli` job is triggered, which configures AWS CLI, updates the launch template, and configures the auto-scaling group.
+- **The_Jobs Workflow**: Orchestrate job execution sequences and dependencies. Define the `the_jobs` workflow to execute the `build-and-push` job followed by the `aws-cli` job upon successful completion of the former.
 
-### Conclusion
+### Integration Success Verification
 
-The CircleCI configuration file orchestrates the CI/CD pipeline for the demo project, from building and pushing Docker images to AWS infrastructure configuration. It utilizes custom commands, jobs, and workflows to automate the process efficiently.
+Verify successful integration by checking the following:
 
-## Successful Integration
+1. CircleCI Integration Status.
+   ![CircleCI Integration Status](image_link)
 
-Let's check what integration does:
+2. Docker Image Pushed to Dockerhub Repository.
+   ![Docker Image Push](image_link)
 
-1.  THe CircleCI Integration was successful.
+3. Creation of New Launch Template Version and Automatic Set to Default via CircleCI.
+   ![Launch Template Version Creation](image_link)
 
-  Image 
-  
-2. The Image was pushed to my Dockerhub Repository
-  Image
-3.  New Launch template version was created and automatically set to default usin the Circleci
-  Image
-4.  The Autoscaling group update the Instance to use the latest version created in the CircleCI
-  Image
-5.  Refresh the Application Load Balancer DNS Created Before, it should change to the Pet-CLinic App
+4. Autoscaling Group Instance Update to Utilize Latest Launch Template Version.
+   ![Autoscaling Group Update](image_link)
 
-  Image
-  
-### Stages:
+5. Refresh of Application Load Balancer DNS to Reflect Pet-CLinic App.
+   ![Application Load Balancer Refresh](image_link)
 
-- Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)
-- Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md) <=== Here
-- Stage 3: CleanUp
+### Additional Information
+
+For further details and stages of the project, refer to the following:
+
+- Stage 1: [Provisioning of Infrastructure Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md)
+- Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md)
+- Stage 3: Cleanup
+
+By following these instructions meticulously, you ensure the smooth operation and automation of your project's CI/CD pipeline using CircleCI.

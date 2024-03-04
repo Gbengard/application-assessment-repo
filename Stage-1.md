@@ -122,6 +122,24 @@ This Terraform template automates the setup of a basic AWS infrastructure, inclu
 
 **Happy provisioning!**
 
+##Checking the Provisioned Infrastructure
+
+1. Using the Terraform Cloud, all 23 resources were fully created
+
+    Images
+
+2. Go to running "EC2 Instaces", there are 2 instances in the private subnet currently running.
+
+   Images
+
+3. Go to "Target Group", the two instances are healthy.
+
+    Images
+   
+5. Go to "Application Load Balancer", copy the DNS Name, paste on your browser. It should be running an Nginx Server
+
+    Images
+
 ## Stages:
 
 - Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md) <===Here

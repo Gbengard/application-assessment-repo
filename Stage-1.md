@@ -70,7 +70,7 @@ For Terraform Cloud using Version Control Workflow:
 
 ## Template Overview
 
-Sure, let's break down the Terraform template you've provided:
+Here is the break down of the Terraform template:
 
 1. **Provider Configuration**: 
    - `provider "aws"`: Configures Terraform to use the AWS provider plugin. It specifies the AWS region as `us-east-1`.
@@ -120,7 +120,7 @@ Sure, let's break down the Terraform template you've provided:
 14. **Autoscaling Group (ASG)**: 
     - `resource "aws_autoscaling_group"`: Creates an autoscaling group using the launch template, specifying the minimum, maximum, and desired capacity, as well as the subnets and target group for the instances.
 
-This Terraform template automates the setup of a basic AWS infrastructure, including VPC, subnets, NAT Gateway, route tables, security groups, Application Load Balancer, launch template, and autoscaling group. It provides a scalable and resilient architecture for hosting applications in AWS.
+This Terraform template automates the setup of an AWS infrastructure, including VPC, subnets, NAT Gateway, route tables, security groups, Application Load Balancer, launch template, and autoscaling group. It provides a scalable and resilient architecture for hosting applications in AWS.
 
 **Happy provisioning!**
 

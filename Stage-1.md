@@ -119,3 +119,9 @@ Sure, let's break down the Terraform template you've provided:
 This Terraform template automates the setup of a basic AWS infrastructure, including VPC, subnets, NAT Gateway, route tables, security groups, Application Load Balancer, launch template, and autoscaling group. It provides a scalable and resilient architecture for hosting applications in AWS.
 
 **Happy provisioning!**
+
+## Stages:
+
+- Stage 1: [Provisioning of Instracture Using Terraform](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-1.md) <===Here
+- Stage 2: [CI/CD Pipeline using CircleCI](https://github.com/Gbengard/application-assessment-repo/blob/main/Stage-2.md)
+- Stage 3: CleanUp

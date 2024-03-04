@@ -36,9 +36,9 @@ Define custom commands to encapsulate reusable sequences of steps across multipl
 
   - **Userdata Script Creation**: Generate a Bash script (`userdata.sh`) to update packages, install Docker, configure Docker run commands, and create/encode userdata for launch template updates.
 
-  - **Launch Template Versioning**: Create and update launch template versions with the modified userdata script.
+  - **Launch Template Versioning**: Create and update launch template versions with the modified user-data script.
 
-  - **Autoscaling Group Configuration**: Update autoscaling group to utilize the latest launch template version.
+  - **Autoscaling Group Configuration**: Update the autoscaling group to utilize the latest launch template version.
 
 #### Workflows
 
@@ -49,19 +49,24 @@ Define custom commands to encapsulate reusable sequences of steps across multipl
 Verify successful integration by checking the following:
 
 1. CircleCI Integration Status.
-   ![CircleCI Integration Status](image_link)
+
+   ![Untitled](/images/Untitled8.png)
 
 2. Docker Image Pushed to Dockerhub Repository.
-   ![Docker Image Push](image_link)
+
+   ![Untitled](/images/Untitled9.png)
 
 3. Creation of New Launch Template Version and Automatic Set to Default via CircleCI.
-   ![Launch Template Version Creation](image_link)
+
+   ![Untitled](/images/Untitled10.png)
 
 4. Autoscaling Group Instance Update to Utilize Latest Launch Template Version.
-   ![Autoscaling Group Update](image_link)
+   
+   ![Untitled](/images/Untitled11.png)
 
-5. Refresh of Application Load Balancer DNS to Reflect Pet-CLinic App.
-   ![Application Load Balancer Refresh](image_link)
+5. Refresh the Application Load Balancer DNS to Reflect the Pet-Clinic App.
+   
+   ![Untitled](/images/Untitled12.png)
 
 ### Additional Information
 

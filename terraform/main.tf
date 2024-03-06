@@ -242,7 +242,6 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = 3
   vpc_zone_identifier  = [aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
 
-  # Use the security group from the launch template
   target_group_arns    = [aws_lb_target_group.target_group.arn]
   health_check_type    = "ELB"
   termination_policies = ["OldestInstance"]
